@@ -7,14 +7,6 @@ interface UploadProps {
     onComplete?: (base64Data: string) => void;
 }
 
-/**
- * Renders an upload UI that accepts JPEG/PNG images via drag-and-drop or file input and displays simulated upload progress.
- *
- * The component is gated by the current sign-in state; when a valid image is selected it shows an analyzing progress indicator and, after progress reaches 100% and a short delay, invokes the optional completion callback with the file encoded as a base64 data URL.
- *
- * @param onComplete - Optional callback invoked with the uploaded file's base64 data URL once analysis completes and the component finishes its redirect delay
- * @returns The Upload component's rendered JSX element
- */
 function Upload({onComplete}: UploadProps) {
 
     const [file, setFile] = useState<File | null>();
