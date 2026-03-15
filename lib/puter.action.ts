@@ -1,4 +1,8 @@
 import puter from "@heyputer/puter.js";
+import {PUTER_WORKER_URL} from "./constants";
+import {getOrCreateHostingConfig, uploadImageHosting} from "./puter.hosting";
+import {it} from "node:test";
+import {isHostedUrl} from "./utils";
 
 export const signIn = async () => await puter.auth.signIn();
 
@@ -8,6 +12,52 @@ export const getCurrentUser = async () => {
     try {
         return await puter.auth.getUser();
     } catch {
+        return null;
+    }
+}
+
+export const createProject = async ({ item }: CreateProjectParams):
+Promise<DesignItem | null | undefined> => {
+
+    if(!PUTER_WORKER_URL) {
+        console.warn(`Missing VITE_PUTER_WORKER_URL; skip history fetch`);
+        return null;
+    }
+    const projectId = item.id;
+
+    const hosting = await getOrCreateHostingConfig();
+
+    const hostedSource = projectId ? await uploadImageHosting({hosting, url: item.sourceImage, projectId, label: 'source'}) : null;
+
+    const hostedRender = projectId && item.renderedImage ?
+        await uploadImageHosting({hosting, url: item.renderedImage, projectId, label: 'rendered'}) : null;
+
+    const resolvedSource = hostedSource?.url || (isHostedUrl(item.sourceImage)
+    ? item.sourceImage : "");
+
+    const resolvedRender = hostedRender?.url
+        ? hostedRender?.url
+        : item.renderedImage && isHostedUrl(item.renderedImage)
+            ? item.renderedImage
+            : undefined;
+
+    const {
+        sourcePath: _sourcePath,
+        renderedPath: _renderedPath,
+        publicPath: _publicPath,
+        ...rest
+    } = item;
+
+    const payload = {
+        ...rest,
+        sourceImage: resolvedSource,
+        renderedImage: resolvedRender,
+    }
+
+    try {
+        return payload;
+    } catch (e) {
+        console.log('Failed to save project', e);
         return null;
     }
 }
