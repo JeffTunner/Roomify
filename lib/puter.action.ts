@@ -1,7 +1,6 @@
 import puter from "@heyputer/puter.js";
 import {PUTER_WORKER_URL} from "./constants";
 import {getOrCreateHostingConfig, uploadImageHosting} from "./puter.hosting";
-import {it} from "node:test";
 import {isHostedUrl} from "./utils";
 
 export const signIn = async () => await puter.auth.signIn();
@@ -19,10 +18,10 @@ export const getCurrentUser = async () => {
 export const createProject = async ({ item }: CreateProjectParams):
 Promise<DesignItem | null | undefined> => {
 
-    if(!PUTER_WORKER_URL) {
+   /* if(!PUTER_WORKER_URL) {
         console.warn(`Missing VITE_PUTER_WORKER_URL; skip history fetch`);
         return null;
-    }
+    } */
     const projectId = item.id;
 
     const hosting = await getOrCreateHostingConfig();
