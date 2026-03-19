@@ -4,14 +4,10 @@ import Upload from "../../components/Upload";
 import {ArrowRight, ArrowUpRight, Clock, Layers} from "lucide-react";
 import Button from "../../components/ui/Button";
 import {useNavigate} from "react-router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {createProject} from "../../lib/puter.action";
 
-/**
- * Provide metadata tags for the route.
- *
- * @returns An array of meta tag objects for the route: a document `title` and a `description` meta.
- */
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -19,21 +15,13 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-/**
- * Render the application's Home page with hero, upload, and projects sections.
- *
- * The component presents an announcement, hero content, upload card, and a projects list.
- * When a floor plan is uploaded, the page navigates to a visualizer route built from a generated id.
- *
- * @returns The React element tree for the Home route.
- */
 export default function Home() {
 
     const navigate = useNavigate();
     const [projects, setProjects] = useState<DesignItem[]>([]);
 
     async function handleUploadComplete(base64Image: string) {
-        const newId = Date.now.toString();
+        const newId = Date.now().toString();
         const name = `Residence ${newId}`;
 
         const newItem = {

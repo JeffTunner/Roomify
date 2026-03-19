@@ -9,7 +9,7 @@ interface UploadProps {
 
 function Upload({onComplete}: UploadProps) {
 
-    const [file, setFile] = useState<File | null>();
+    const [file, setFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [progress, setProgress] = useState(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -100,12 +100,17 @@ function Upload({onComplete}: UploadProps) {
     return (
         <div className="upload">
             {!file ? (
-                <div className={`dropzone ${isDragging ? 'is-Dragging' : ''}`}>
+                <div className={`dropzone ${isDragging ? 'is-Dragging' : ''}`}
+                     onDragOver={handleDragOver}
+                     onDragLeave={handleDragLeave}
+                     onDrop={handleDrop}
+                >
                     <input
                         type="file"
                         className="drop-input"
                         accept=".jpg,.jpeg,.png"
                         disabled={!isSignedIn}
+                        onChange={handleChange}
                     />
 
                     <div className="drop-content">
