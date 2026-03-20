@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="34fed8bc-b193-4fbe-a7f6-b85627ff35f1" name="Changes" comment="fixed code rabbit suggested bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/visualizer.$id.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/visualizer.$id.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Upload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/puter.action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/puter.action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/type.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
